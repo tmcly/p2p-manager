@@ -17,12 +17,7 @@ export class P2PIntentsController {
     return {
       id: p2pIntent.id,
       status: p2pIntent.status,
-      intentType: p2pIntent.intentType,
-      amount: p2pIntent.amount,
-      currency: p2pIntent.currency,
-      chain: p2pIntent.chain,
       createdAt: p2pIntent.createdAt,
-      expiresAt: p2pIntent.expiresAt,
       _links: {
         self: {
           href: `/p2p-intents/${p2pIntent.id}`,
