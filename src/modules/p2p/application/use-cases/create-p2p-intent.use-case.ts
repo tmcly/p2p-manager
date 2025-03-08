@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, Inject } from '@nestjs/common';
 import { P2PIntent } from '../../domain/entities/p2p-intent.entity';
 import { IP2PIntentRepository } from '../../domain/repositories/p2p-intent.repository';
@@ -21,8 +19,6 @@ export class CreateP2PIntentUseCase {
       createP2PIntentDto.chain,
       createP2PIntentDto.description,
     );
-
-    console.log(p2pIntent);
 
     return this.p2pIntentRepository.create(p2pIntent);
   }
