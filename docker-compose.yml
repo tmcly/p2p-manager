@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: p2p-manager-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: p2puser
+      POSTGRES_PASSWORD: p2ppassword
+      POSTGRES_DB: p2p_manager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - p2p-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U p2puser -d p2p_manager"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: p2p-manager-pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    networks:
+      - p2p-network
+
+networks:
+  p2p-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 
